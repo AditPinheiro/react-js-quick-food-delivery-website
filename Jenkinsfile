@@ -11,19 +11,19 @@ pipeline {
 	    
 	stage('Submit Stack') {
             steps {
-		    powershell "echo $env.WORKSPACE"
-		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'ACCESS_KEY_ID', credentialsId: 'AWS-IAM', secretKeyVariable: 'SECRET_ACCESS_KEY']]) {	     
-				    powershell "echo $env.WORKSPACE"
-				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
-		    }
+		    //powershell "echo $env.WORKSPACE"
+		    //withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'ACCESS_KEY_ID', credentialsId: 'AWS-IAM', secretKeyVariable: 'SECRET_ACCESS_KEY']]) {	     
+			//	    powershell "echo $env.WORKSPACE"
+			//	    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
+		//    }
 		    script{
 			
 			    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'ACCESS_KEY_ID', credentialsId: 'AWS_IAM', secretKeyVariable: 'SECRET_ACCESS_KEY']]) {
 			   
 		    // {
 		     
-				    powershell "echo $env.WORKSPACE"
-				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
+				    sudo powershell "echo $env.WORKSPACE"
+				    sudo powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
 		     sh "sudo -su"	    
 		     sh "apt-get update -qq"
         	     sh "apt-get install -y apt-transport-https ca-certificates"
