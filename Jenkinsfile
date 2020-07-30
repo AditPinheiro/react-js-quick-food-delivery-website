@@ -11,11 +11,11 @@ pipeline {
 	    
 	stage('Submit Stack') {
             steps {
-		    powershell "echo $env.WORKSPACE"
-		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAJ3UJGT4OMRD4WGIQ', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) {	     
-				    powershell "echo $env.WORKSPACE"
-				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
-		    }
+		    //powershell "echo $env.WORKSPACE"
+		    //withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAJ3UJGT4OMRD4WGIQ', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) {	     
+			//	    powershell "echo $env.WORKSPACE"
+			//	    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
+		    //}
 		    script{
 			
 			    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAJ3UJGT4OMRD4WGIQ', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) {
