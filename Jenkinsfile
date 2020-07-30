@@ -5,21 +5,21 @@ pipeline {
 	stage ('checkout') {
 	    steps{
 		    //git url: 'https://github.com/raamstar/simple-reactjs-app.git'
-		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: '']]])
+		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git']]])
 	}
 	}
 	    
 	stage('Submit Stack') {
             steps {
 		    powershell "echo $env.WORKSPACE"
-		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: '', credentialsId: 'aws-key-new1', secretKeyVariable: '']]) {	     
+		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAJ3UJGT4OMRD4WGIQ', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) {	     
 				    powershell "echo $env.WORKSPACE"
 				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
 		    }
 		    script{
 			
-			    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: '', credentialsId: 'aws-key-new1', secretKeyVariable: '']]) {
-			    
+			    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAJ3UJGT4OMRD4WGIQ', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) {
+			    // withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AKIAXA633C7CVYMMLNP3', credentialsId: 'AWS-IAM', secretKeyVariable: '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']]) 
 		    // {
 		     
 				    powershell "echo $env.WORKSPACE"
