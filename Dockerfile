@@ -1,10 +1,20 @@
-FROM node:alpine
-WORKDIR '/app'
+# pull official base image
+FROM node:13.12.0-alpine
 
-COPY package.json . 
+# set working directory
+WORKDIR /app
 
-RUN npm install
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-COPY . . 
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install 
+RUN npm install react-scripts@3.4.1 -g --silent
 
-CMD ["npm","start"]
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "start"]
