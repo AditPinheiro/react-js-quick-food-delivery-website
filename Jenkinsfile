@@ -11,16 +11,12 @@ pipeline {
 	    
 	stage('Submit Stack') {
             steps {
-		    //powershell "echo $env.WORKSPACE"
-		    //withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'ACCESS_KEY_ID', credentialsId: 'AWS-IAM', secretKeyVariable: 'SECRET_ACCESS_KEY']]) {	     
-			//	    powershell "echo $env.WORKSPACE"
-			//	    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
-		//    }
+		    
 		    script{
 			
 			    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'ACCESS_KEY_ID', credentialsId: 'AWS_ID', secretKeyVariable: 'SECRET_ACCESS_KEY']]) {
 			   
-		    // {
+		    
 		     
 				    powershell "echo $env.WORKSPACE"
 				    powershell "aws cloudformation create-stack --stack-name s3bucket --template-body file://$env.WORKSPACE/stack.json --region 'us-east-1'"
@@ -39,7 +35,7 @@ pipeline {
         	     sh "systemctl daemon-reload"
                      sh "systemctl restart docker"
         	     sh "git init"
-        	     sh "git clone https://github.com/raamstar/simple-reactjs-app.git"
+        	     sh "git clone https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git"
         	     sh "docker build . -t react-app"
         	     sh "docker run react-app"    
 		   }
