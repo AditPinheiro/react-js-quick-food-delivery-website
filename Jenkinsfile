@@ -18,7 +18,7 @@ pipeline {
 		//    }
 		    script{
 			
-			    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'ACCESS_KEY_ID', credentialsId: 'AWS_IAM', secretKeyVariable: 'SECRET_ACCESS_KEY']]) {
+			    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'ACCESS_KEY_ID', credentialsId: 'AWS_ID', secretKeyVariable: 'SECRET_ACCESS_KEY']]) {
 			   
 		    // {
 		     
