@@ -19,7 +19,7 @@ pipeline {
 							 sh "apt install openjdk-8-jdk -y"
 							 
 							 sh "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -"    
-							 sh "add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+							 sh "add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable""
 							 sh "apt-get update"
 							 sh "apt-cache policy docker-ce"
 							 sh "apt-get install -y docker-ce"
