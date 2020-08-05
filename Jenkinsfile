@@ -15,8 +15,8 @@ pipeline {
 					script{
 								echo "Hello world. this is my lame pipeline"
 							     //sh "sudo su -"
-						`		sh "echo '' | sudo -S apt-get update -qq"
-							    // sh "sudo apt-get update -qq"
+						`		//sh "echo '' | sudo -S apt-get update -qq"
+							     sh "sudo apt-get update -qq"
 							    /* sh "sudo sh apt-get install -y apt-transport-https ca-certificates"
 							     sh "sudo sh apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D"
 							     sh "sudo sh echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | tee /etc/apt/sources.list.d/docker.list"
