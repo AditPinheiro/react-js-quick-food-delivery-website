@@ -14,9 +14,9 @@ pipeline {
 		    
 					script{
 					
-							     //sh "sudo su -"	    
-							     sh "sudo sh apt-get update -qq"
-							     sh "sudo sh apt-get install -y apt-transport-https ca-certificates"
+							     sh "sudo su -"	    
+							     //sh "sudo apt-get update -qq"
+							    /* sh "sudo sh apt-get install -y apt-transport-https ca-certificates"
 							     sh "sudo sh apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D"
 							     sh "sudo sh echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | tee /etc/apt/sources.list.d/docker.list"
 							     sh "sudo sh apt-get update -qq"
@@ -32,7 +32,7 @@ pipeline {
 							 sh "git init"
 							 sh "git clone https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git"
 							 sh "docker build . -t food-app"
-							 sh "docker run food-app" 		   
+							 sh "docker run food-app" */		   
 						}	    
 				}
           }    
