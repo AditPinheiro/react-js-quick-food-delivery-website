@@ -14,15 +14,15 @@ pipeline {
 		    
 					script{
 					
-							     sh "sudo su -"	    
-							     sh "apt-get update -qq"
-							     sh "apt-get install -y apt-transport-https ca-certificates"
-							     sh "apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D"
-							     sh "echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | tee /etc/apt/sources.list.d/docker.list"
-							     sh "apt-get update -qq"
-							     sh "apt-get purge lxc-docker || true"
+							     //sh "sudo su -"	    
+							     sh "sudo apt-get update -qq"
+							     sh "sudo apt-get install -y apt-transport-https ca-certificates"
+							     sh "sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D"
+							     sh "sudo echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | tee /etc/apt/sources.list.d/docker.list"
+							     sh "sudo apt-get update -qq"
+							     sh "sudo apt-get purge lxc-docker || true"
 
-							     sh "apt-get -y install docker-engine"
+							     sh "sudo apt-get -y install docker-engine"
 							     sh "usermod -aG docker ubuntu"
 							     sh "mkdir -p /etc/systemd/system/docker.service.d"
 
