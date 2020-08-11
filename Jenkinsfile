@@ -26,13 +26,13 @@ pipeline{
       }
     }
     
-    stage ('Deploy to Dev') {
+   /* stage ('Deploy to Dev') {
       steps{
         echo "Deploying to Dev Environment"
         sh "docker rm -f foodappnew || true"
-        sh "docker run -it -d --name=foodappnew -p 3001:3000 aditpinheiro/foodappnew:2"
+        sh "docker run -it -d --name=foodappnew -p 3001:3000 ${}"
       }
-    }
+    }*/
     
   }
 }
