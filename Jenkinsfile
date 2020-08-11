@@ -9,10 +9,13 @@ pipeline{
   agent any
   
   stages{
-  
-    stage('Checkout Code'){
+    
+       stage('Checkout Code'){
+         steps{
       		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git']]])
+           }
     }
+   
     
     stage ('Build Docker Image') {
       steps{
