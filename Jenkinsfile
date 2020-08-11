@@ -1,0 +1,35 @@
+pipeline{
+  
+  environment{
+    registry = "aditpinheiro/foodappnew"
+    registryCredential = 'aditpinheiro_dockerhub'
+    dockerImage = ''
+  }
+  
+  agent any
+  
+  stages{
+  
+    stage('Checkout Code'){
+      		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git']]])
+    }
+    
+    stage ('Build Docker Image') {
+      steps{
+        echo "Building Docker Image"
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    
+    stage ('Deploy to Dev') {
+      steps{
+        echo "Deploying to Dev Environment"
+        sh "docker rm -f foodappnew || true"
+        sh "docker run -d --name=foodappnew -p 3001:3000 aditpinheiro/foodappnew"
+      }
+    }
+    
+  }
+}
