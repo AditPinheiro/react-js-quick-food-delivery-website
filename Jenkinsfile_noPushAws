@@ -1,39 +1,17 @@
 pipeline{
-  
-  environment{
-    registry = "aditpinheiro/foodappnew"
-    registryCredential = 'aditpinheiro_dockerhub'
-    dockerImage = ''
-  }
-  
   agent any
-  
   stages{
-    
-       stage('Checkout Code'){
-         steps{
-      		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git']]])
-           }
-    }
-   
-    
-    stage ('Build Docker Image') {
+    stage('Create AWS stack'){
       steps{
-        echo "Building Docker Image"
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        echo "Creating aws cloudforamtion stack"
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: '', credentialsId: 'aws-key', secretKeyVariable: '']]) {
+          
+            sh 'aws cloudformation create-stack --stack-name foodapp --template-body file://foodapp_template.yaml --region us-east-1 --parameters  ParameterKey=SSHKey,ParameterValue=aditpinheiro_ubuntu ParameterKey=ELBVPC,ParameterValue=vpc-2bbabd51 ParameterKey=ELBSubnet,ParameterValue="subnet-86cff1b8\\,subnet-caa248ac"'
+
+        
         }
+        
       }
     }
-  
-    stage ('Deploy to Dev') {
-      steps{
-        echo "Deploying to Dev Environment"
-        echo "Using image ----> '${registry}:${BUILD_NUMBER}'"
-        sh "docker rm -f foodappnew || true"
-        sh "docker run -it -d --name=foodappnew -p 3001:3000 '${registry}:${BUILD_NUMBER}'"
-      }
-    }
-    
   }
 }
