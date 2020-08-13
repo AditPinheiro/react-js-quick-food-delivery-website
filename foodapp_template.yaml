@@ -28,6 +28,8 @@ Resources:
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
+          git init
+        	git clone https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git
           docker run -d --name=foodapp -p 3000:3000 aditpinheiro/foodappnew:1
 
   MyInstance2:
@@ -48,6 +50,8 @@ Resources:
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
+          git init
+        	git clone https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git
           docker run -d --name=foodapp -p 3000:3000 aditpinheiro/foodappnew:1
 
   ELBSecurityGroup:
