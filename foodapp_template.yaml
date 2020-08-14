@@ -28,7 +28,7 @@ Resources:
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
-          docker run -d --name=foodapp -p 3000:3000 aditpinheiro/foodappnew:1
+          docker run -d --name=foodapp -p 3000:3000 aditpinheiro/food-app:good
 
   MyInstance2:
     Type: AWS::EC2::Instance
@@ -48,7 +48,7 @@ Resources:
           yum install docker
           service docker start
           usermod -a -G docker ec2-user
-          docker run -d --name=foodapp -p 3000:3000 aditpinheiro/foodappnew:1
+          docker run -d --name=foodapp -p 3000:3000 aditpinheiro/food-app:good
 
   ELBSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
