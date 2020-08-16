@@ -22,6 +22,7 @@ pipeline{
             echo "Building Docker Image"
             script {
               dockerImage = docker.build registry + ":$BUILD_NUMBER"
+              
             }
           }
         }
@@ -29,6 +30,7 @@ pipeline{
           stage ('Push Docker Image') {
             steps{
               script{
+                sh "docker logout"
                 withDockerRegistry(credentialsId: 'dockerhub_cred') {
                   
                     sh "docker push '${registry}:${BUILD_NUMBER}'"
