@@ -1,14 +1,7 @@
  
 pipeline{
   agent any
-  stages{
-  
-  /*stage('Checking out code from release'){
-     steps{
-          checkout([$class: 'GitSCM', branches: [[name: '*/release']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git']]])
-      }
-    }*/
-  
+  stages{ 
   
     stage('Creating AWS stack'){
       steps{
