@@ -2,6 +2,14 @@
 pipeline{
   agent any
   stages{
+  
+  stage('Checking out code from release'){
+     steps{
+          checkout([$class: 'GitSCM', branches: [[name: '*/release']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git']]])
+      }
+    }
+  
+  
     stage('Creating AWS stack'){
       steps{
         echo "Creating aws cloudforamtion stack"
@@ -14,5 +22,7 @@ sh 'aws cloudformation create-stack --stack-name foodapp-release --template-body
         
       }
     }
+    
+    
   }
 }
