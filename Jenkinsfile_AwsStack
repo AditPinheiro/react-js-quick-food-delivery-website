@@ -1,7 +1,7 @@
 pipeline{
   agent any
   stages{
-    stage('Create AWS stack'){
+    stage('Creating AWS stack'){
       steps{
         echo "Creating aws cloudforamtion stack"
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: '', credentialsId: 'aws-key', secretKeyVariable: '']]) {
