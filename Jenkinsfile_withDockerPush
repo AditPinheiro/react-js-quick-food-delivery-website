@@ -30,7 +30,7 @@ pipeline{
             steps{
               script{
                 withCredentials([string(credentialsId: 'aditpinheiro_dockerhub', variable: 'dockercred')]) {        
-                        sh "docker login -u aditpinheiro -p ${dockercred}"
+                        sh "docker login -u aditpinheiro -p 'aditpinheiro_dockerhub'"
                         sh "docker push '${registry}:${BUILD_NUMBER}'"
                   }
                }        
