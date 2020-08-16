@@ -1,7 +1,7 @@
 pipeline{
   
   environment{
-    registry = "aditpinheiro/foodappnew"
+    registry = "aditpinheiro/food-app"
     registryCredential = 'aditpinheiro_dockerhub'
     dockerImage = ''
   }
@@ -14,39 +14,37 @@ pipeline{
          steps{
       		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/AditPinheiro/react-js-quick-food-delivery-website.git']]])
            }
-    }
+         }
    
     
-    stage ('Build Docker Image') {
-      steps{
-        echo "Building Docker Image"
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    
-    stage ('Push Docker Image') {
-      steps{
-        echo "Pushing Docker Image"
-        echo "PLEASE WORK "
-        script {
-             withDockerRegistry(credentialsId: 'aditpinheiro_dockerhub') {
-             dockerImage.push()
-             dockerImage.push('latest')
+        stage ('Build Docker Image') {
+          steps{
+            echo "Building Docker Image"
+            script {
+              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            }
           }
         }
-      }
-    }
+    
+          stage ('Push Docker Image') {
+            steps{
+              script{
+                withCredentials([string(credentialsId: 'aditpinheiro_dockerhub', variable: 'dockercred')]) {        
+                        sh "docker login -u aditpinheiro -p ${dockercred}"
+                        sh "docker push '${registry}:${BUILD_NUMBER}'"
+                  }
+               }        
+            }
+          }
   
-    stage ('Deploy to Dev') {
-      steps{
-        echo "Deploying to Dev Environment"
-        echo "Using image ----> '${registry}:${BUILD_NUMBER}'"
-        sh "docker rm -f foodappnew || true"
-        sh "docker run -it -d --name=foodappnew -p 3001:3000 '${registry}:${BUILD_NUMBER}'"
-      }
-    }
+          stage ('Deploy to Dev') {
+            steps{
+              echo "Deploying to Dev Environment"
+              echo "Using image ----> '${registry}:${BUILD_NUMBER}'"
+              sh "docker rm -f foodappnew || true"
+              sh "docker run -it -d --name=foodappnew -p 3001:3000 '${registry}:${BUILD_NUMBER}'"
+            }
+          }
     
   }
 }
