@@ -31,8 +31,9 @@ pipeline{
             steps{
               script{
                 sh "docker logout"
+                 echo " 'registryCredential'"
                 withDockerRegistry(credentialsId: 'dockerhub_cred') {
-                    sh "sudo su"
+                  
                     sh "docker push '${registry}:${BUILD_NUMBER}'"
                  }
               }        
