@@ -6,7 +6,7 @@ pipeline{
         echo "Creating aws cloudforamtion stack"
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: '', credentialsId: 'aws-key', secretKeyVariable: '']]) {
           
-sh 'aws cloudformation create-stack --stack-name foodapp --template-body file://foodapp_template.yaml --region us-east-1 --parameters ParameterKey=SSHKey,ParameterValue=aditpinheiro_ubuntu ParameterKey=ELBVPC,ParameterValue=vpc-2bbabd51 ParameterKey=ELBSubnet,ParameterValue="subnet-3e35c261\\,subnet-836bd1ce"'
+sh 'aws cloudformation create-stack --stack-name foodapp-master --template-body file://foodapp_template.yaml --region us-east-1 --parameters ParameterKey=SSHKey,ParameterValue=aditpinheiro_ubuntu ParameterKey=ELBVPC,ParameterValue=vpc-2bbabd51 ParameterKey=ELBSubnet,ParameterValue="subnet-3e35c261\\,subnet-836bd1ce"'
 
         
         }
